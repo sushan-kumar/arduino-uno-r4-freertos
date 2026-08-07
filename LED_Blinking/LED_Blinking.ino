@@ -1,6 +1,6 @@
 #include "Arduino_FreeRTOS.h"
 
-static const int led_pin = LED_BUILTIN;
+static const int led_pin = LED_BUILTIN; // On board led 
 
 void toggleLED(void *parameter){
   while (1) {
@@ -17,7 +17,12 @@ void setup() {
   Serial.begin(115200);
   pinMode(led_pin, OUTPUT);
 
-  xTaskCreate(toggleLED, "Toggle LED", 1024, NULL, 1, NULL);
+  xTaskCreate(toggleLED,    //Function to be called
+            "Toggle LED",   //Name of the task
+             1024,          //Stack size or stack depth
+             NULL,          //Parameter to pass to function
+             1,             //Task priority
+             NULL);         //Task handle
   
   vTaskStartScheduler();
 
