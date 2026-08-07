@@ -1,0 +1,17 @@
+# Arduino Build and Compilation Files
+build/
+*.elf
+*.eep
+*.bin
+*.hex
+*.map
+*.o
+*.a
+
+# Arduino IDE 2.x and VS Code specific folders
+.vscode/
+.cache/
+
+# Operating System hidden files
+.DS_Store
+Thumbs.db
