@@ -94,9 +94,9 @@ Contributions are welcome. If you'd like to add a new example, improve documenta
 
 ## Resources
 
-- [Official FreeRTOS Documentation](https://www.freertos.org/Documentation/00-WhereToStart)
+- [Official FreeRTOS Documentation](https://www.freertos.org/Documentation/00-Overview)
 - [Arduino_FreeRTOS Repository](https://github.com/feilipu/Arduino_FreeRTOS_Library)
-- [Arduino Uno R4 Documentation](https://docs.arduino.cc/hardware/uno-r4/)
+- [Arduino Uno R4 Documentation](https://docs.arduino.cc/hardware/uno-r4-wifi/)
 
 ## License
 
