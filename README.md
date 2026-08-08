@@ -51,7 +51,7 @@ Each example resides in its own directory as a complete Arduino sketch (`.ino`),
 
 ### 2. Arduino_FreeRTOS Library
 
-The examples depend on [Arduino_FreeRTOS](https://github.com/feilipu/Arduino_FreeRTOS) — a maintained port of the FreeRTOS kernel for Arduino boards.
+The examples depend on [Arduino_FreeRTOS](https://github.com/feilipu/Arduino_FreeRTOS_Library) — a maintained port of the FreeRTOS kernel for Arduino boards.
 
 | Component | Maintainer |
 |-----------|------------|
@@ -67,7 +67,7 @@ The examples depend on [Arduino_FreeRTOS](https://github.com/feilipu/Arduino_Fre
 
 **Option B — Manual installation (ZIP):**
 
-1. Download the library from the [GitHub repository](https://github.com/feilipu/Arduino_FreeRTOS/archive/refs/heads/master.zip).
+1. Download the library from the [GitHub repository](https://github.com/feilipu/Arduino_FreeRTOS_Library).
 2. In the Arduino IDE, navigate to **Sketch → Include Library → Add .ZIP Library…**.
 3. Select the downloaded archive.
 
