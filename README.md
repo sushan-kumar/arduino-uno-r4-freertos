@@ -33,10 +33,12 @@ Each example resides in its own directory as a complete Arduino sketch (`.ino`),
 
 | Component | Description |
 |-----------|--------------|
-| Arduino Uno R4 Minima | Renesas RA4M1, 48 MHz, 32 KB SRAM |
-| Arduino Uno R4 WiFi | Renesas RA4M1 + ESP32-S3 (WiFi / Bluetooth) |
+| Arduino Uno R4 Minima | Renesas RA4M1, 48 MHz, **256 KB Flash (ROM), 32 KB SRAM** |
+| Arduino Uno R4 WiFi | Renesas RA4M1 + ESP32-S3 (WiFi / Bluetooth), **256 KB Flash (ROM), 32 KB SRAM** |
 | USB-C cable | Required for both Uno R4 boards |
 
+> **Memory Note:** The R4's 32 KB of SRAM is a crucial constraint when using FreeRTOS. Each task you create will consume a portion of this RAM for its dedicated memory stack.
+>
 > **Note:** Code in this repository targets the Uno R4 (Renesas RA4M1 architecture). The classic Uno R3 (ATmega328P) is also supported by the underlying library, but pin mappings and available RAM differ, so some examples may require adjustment before running on an R3.
 
 ## Prerequisites
