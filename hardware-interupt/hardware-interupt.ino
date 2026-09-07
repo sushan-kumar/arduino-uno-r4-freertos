@@ -1,18 +1,18 @@
 // Uno R4 ISR Critical Section Demo
 // Increments a global variable in a hardware timer ISR and prints it in a task.
 
-#include <Arduino_FreeRTOS.h> //[cite: 5]
-#include "FspTimer.h" //[cite: 5]
+#include <Arduino_FreeRTOS.h>
+#include "FspTimer.h" 
 
 const TickType_t task_delay = 2000 / portTICK_PERIOD_MS;
 volatile int isr_counter = 0;
 FspTimer hardware_timer;
 
-const int led_pin = LED_BUILTIN; //[cite: 5]
+const int led_pin = LED_BUILTIN; 
 volatile bool led_state = false;
 
 // Hardware timer interrupt callback
-void my_timer_callback(timer_callback_args_t __attribute((unused)) *p_args) { //[cite: 5]
+void my_timer_callback(timer_callback_args_t __attribute((unused)) 
   
   // Pause interrupts to safely modify our shared counter
   UBaseType_t saved_int_status = taskENTER_CRITICAL_FROM_ISR();
@@ -42,7 +42,7 @@ void printValues(void *parameters) {
 }
 
 void setup() {
-  pinMode(led_pin, OUTPUT); //[cite: 5]
+  pinMode(led_pin, OUTPUT); 
 
   Serial.begin(115200);
   while (!Serial) { ; }
@@ -54,27 +54,26 @@ void setup() {
   xTaskCreate(printValues, "Print values", 256, NULL, 1, NULL);
 
   // Dynamically allocate an available GPT hardware timer
-  uint8_t timer_type = GPT_TIMER; //[cite: 5]
-  int8_t tindex = FspTimer::get_available_timer(timer_type); //[cite: 5]
+  uint8_t timer_type = GPT_TIMER; 
+  int8_t tindex = FspTimer::get_available_timer(timer_type); 
   
   // Fallback: force allocation if standard timers are reserved for PWM
-  if (tindex < 0) { //[cite: 5]
-    tindex = FspTimer::get_available_timer(timer_type, true); //[cite: 5]
-    FspTimer::force_use_of_pwm_reserved_timer(); //[cite: 5]
+  if (tindex < 0) { 
+    tindex = FspTimer::get_available_timer(timer_type, true); 
+    FspTimer::force_use_of_pwm_reserved_timer(); 
   }
 
-  // Initialize and start the timer at 10 Hz (matches the video tutorial)
-  if (tindex >= 0) { //[cite: 5]
-    hardware_timer.begin(TIMER_MODE_PERIODIC, timer_type, tindex, 10.0f, 0.0f, my_timer_callback); //[cite: 5]
-    hardware_timer.setup_overflow_irq(); //[cite: 5]
-    hardware_timer.open(); //[cite: 5]
-    hardware_timer.start(); //[cite: 5]
+  if (tindex >= 0) { 
+    hardware_timer.begin(TIMER_MODE_PERIODIC, timer_type, tindex, 10.0f, 0.0f, my_timer_callback);
+    hardware_timer.setup_overflow_irq();
+    hardware_timer.open();
+    hardware_timer.start();
   }
 
   // Explicitly start the RTOS scheduler for the Uno R4 architecture
-  vTaskStartScheduler(); //[cite: 5]
+  vTaskStartScheduler();
 }
 
 void loop() {
-  // Main execution handled by FreeRTOS tasks and hardware interrupts[cite: 5]
+  // Main execution handled by FreeRTOS tasks and hardware interrupts
 }
