@@ -1,5 +1,7 @@
 #include <Arduino_FreeRTOS.h>
 
+TickType_t mutex_timeout = 1000/portTICK_PERIOD_MS;
+
 static SemaphoreHandle_t mutex_1;
 static SemaphoreHandle_t mutex_2;
 
@@ -12,12 +14,12 @@ void doTaskA(void *parameters) {
   while (1) {
 
     // Take mutex 1 (introduce wait to force deadlock)
-    xSemaphoreTake(mutex_1, portMAX_DELAY);
+    xSemaphoreTake(mutex_1, mutex_timeout);
     Serial.println("Task A took mutex 1");
     vTaskDelay(1 / portTICK_PERIOD_MS);
 
     // Take mutex 2
-    xSemaphoreTake(mutex_2, portMAX_DELAY);
+    xSemaphoreTake(mutex_2, mutex_timeout);
     Serial.println("Task A took mutex 2");
 
     // Critical section protected by 2 mutexes
@@ -41,12 +43,12 @@ void doTaskB(void *parameters) {
   while (1) {
 
     // Take mutex 2 (introduce wait to force deadlock)
-    xSemaphoreTake(mutex_2, portMAX_DELAY);
+    xSemaphoreTake(mutex_2, mutex_timeout);
     Serial.println("Task B took mutex 2");
     vTaskDelay(1 / portTICK_PERIOD_MS);
 
     // Take mutex 1
-    xSemaphoreTake(mutex_1, portMAX_DELAY);
+    xSemaphoreTake(mutex_1, mutex_timeout);
     Serial.println("Task B took mutex 1");
 
     // Critical section protected by 2 mutexes
