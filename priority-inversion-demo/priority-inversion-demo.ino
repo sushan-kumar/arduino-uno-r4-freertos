@@ -83,8 +83,7 @@ void dotaskH(void *parameters){
 }
 
 void masterTask(void *parameters){
-  lock = xSemaphoreCreateBinary();
-  xSemaphoreGive(lock);
+  lock = xSemaphoreCreateMutex();
 
   xTaskCreate(dotaskL,"low", 128, NULL, 1, NULL);
 
